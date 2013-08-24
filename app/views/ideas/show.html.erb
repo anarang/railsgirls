@@ -1,6 +1,6 @@
 <%- model_class = Idea -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1>What a thought!!!</h1>
 </div>
 
 <dl class="dl-horizontal">
@@ -10,6 +10,7 @@
   <dd><%= @idea.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:picture) %>:</strong></dt>
   <dd><%= image_tag(@idea.picture_url, :width => 600) if @idea.picture.present? %></dd>
+
 </dl>
 
 <div class="form-actions">
@@ -23,3 +24,16 @@
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
 </div>
+<div class="page-header">
+   <h3>Comments</h3>
+</div>
+ 
+
+<% @idea.comments.each do |comment| %>
+  <div>
+    <strong><%= comment.user_name %></strong>
+    <br />
+    <p><%= comment.body %></p>
+  </div>
+<% end %>
+<%= render 'comments/form' %>
